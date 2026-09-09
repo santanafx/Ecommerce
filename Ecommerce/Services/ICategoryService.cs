@@ -1,7 +1,6 @@
 public interface ICategoryService
 {
-  Category AddCategory(Category category);
-  Category RemoveCategory(Guid id);
-  ICollection<Category> Categories();
-
+  Task<Category> AddCategory(CategoryDto categoryDto);
+  Task<Category> RemoveCategory(Guid id);
+  Task<ICollection<Category>> Categories();
 }
