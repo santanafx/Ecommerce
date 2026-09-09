@@ -8,6 +8,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<DbContextEcommerce>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<ISalesService, SalesService>();
 
 var app = builder.Build();
 
