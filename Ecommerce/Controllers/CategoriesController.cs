@@ -11,19 +11,19 @@ public class CategoriesController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<Category> AddCategory([FromBody] Category category)
+  public async Task<ActionResult<Category>> AddCategory([FromBody] CategoryDto categoryDto)
   {
-    return Ok(_categoryService.AddCategory(category));
+    return Ok(_categoryService.AddCategory(categoryDto));
   }
 
   [HttpGet]
-  public ActionResult<ICollection<Category>> Categories()
+  public async Task<ActionResult<ICollection<Category>>> Categories()
   {
     return Ok(_categoryService.Categories());
   }
 
-  [HttpDelete]
-  public ActionResult<Category> RemoveCategory(Guid id)
+  [HttpDelete("{id}")]
+  public async Task<ActionResult<Category>> RemoveCategory(Guid id)
   {
     return Ok(_categoryService.RemoveCategory(id));
   }
