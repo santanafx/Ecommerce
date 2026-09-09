@@ -4,4 +4,11 @@ public class Category
   public string Name { get; set; }
   public ICollection<Product> Products { get; private set; }
 
+  private Category() { }
+
+  public Category(CategoryDto dto)
+  {
+    Id = Guid.NewGuid();
+    Name = dto.Name;
+  }
 }

@@ -8,4 +8,14 @@ public class ProductSaleItem
   public int Quantity { get; private set; }
   public decimal UnitPrice { get; private set; }
 
+  private ProductSaleItem() { }
+
+  public ProductSaleItem(ProductSaleItemDto dto)
+  {
+    Id = Guid.NewGuid();
+    ProductId = dto.ProductId;
+    SaleId = dto.SaleId;
+    Quantity = dto.Quantity;
+    UnitPrice = dto.UnitPrice;
+  }
 }
