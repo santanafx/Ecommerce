@@ -12,4 +12,10 @@ public class DbContextEcommerce : DbContext
   public DbSet<Category> Categories { get; set; }
   public DbSet<ProductSaleItem> ProductSaleItems { get; set; }
 
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.Entity<Product>()
+      .HasIndex(p => p.Name)
+      .IsUnique();
+  }
 }
