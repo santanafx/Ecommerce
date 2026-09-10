@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 
 public class ProductsService : IProductsService
 {
@@ -48,6 +49,26 @@ public class ProductsService : IProductsService
   {
     var products = _dbContextEcommerce.Products.ToList();
     return products;
+  }
+
+  public async Task<PagedResponse<Product>> GetProductsPaginated(PaginationParams paginationParams)
+  {
+    var query = _dbContextEcommerce.Products.AsQueryable();
+
+    if (!string.IsNullOrEmpty(paginationParams.SearchTerm))
+      query = query.Where(p => p.Name.Contains(paginationParams.SearchTerm));
+
+    if (paginationParams.CategoryId.HasValue)
+      query = query.Where(p => p.CategoryId == paginationParams.CategoryId.Value);
+
+    var totalRecords = await query.CountAsync();
+
+    var products = await query
+      .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+      .Take(paginationParams.PageSize)
+      .ToListAsync();
+
+    return new PagedResponse<Product>(products, paginationParams.PageNumber, paginationParams.PageSize, totalRecords);
   }
 
   public async Task<Product> RemoveProduct(Guid id)
