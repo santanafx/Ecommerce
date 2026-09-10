@@ -13,5 +13,6 @@ public class Sale
     Id = Guid.NewGuid();
     ProductsList = dto.ProductsList;
     CreatedAt = DateTime.UtcNow;
+    Total = dto.ProductsList.Sum(p => p.Price);
   }
 }
