@@ -1,4 +1,4 @@
 public class SaleDto
 {
-  public ICollection<Product> ProductsList { get; set; }
+  public ICollection<SaleItemDto> ProductsList { get; set; }
 }

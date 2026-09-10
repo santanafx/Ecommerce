@@ -18,7 +18,7 @@ public class SalesController : ControllerBase
   }
 
   [HttpGet("{id}")]
-  public async Task<IActionResult> Get(Guid id)
+  public async Task<IActionResult> Get(int id)
   {
     return Ok(await _salesService.Sale(id));
   }

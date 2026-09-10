@@ -1,4 +1,3 @@
-
 public class CategoryService : ICategoryService
 {
   private readonly DbContextEcommerce _dbContextEcommerce;
@@ -24,11 +23,15 @@ public class CategoryService : ICategoryService
     return _dbContextEcommerce.Categories.ToList();
   }
 
-  public async Task<Category> RemoveCategory(Guid id)
+  public async Task<Category> RemoveCategory(int id)
   {
-    if (_dbContextEcommerce.Categories.Find(id) == null)
+    var category = _dbContextEcommerce.Categories.Find(id);
+    if (category == null)
       throw new ArgumentException("Category id doesnt exist");
 
-    return _dbContextEcommerce.Categories.Find(id);
+    _dbContextEcommerce.Categories.Remove(category);
+    _dbContextEcommerce.SaveChanges();
+
+    return category;
   }
 }

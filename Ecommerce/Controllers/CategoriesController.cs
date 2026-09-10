@@ -23,7 +23,7 @@ public class CategoriesController : ControllerBase
   }
 
   [HttpDelete("{id}")]
-  public async Task<ActionResult<Category>> RemoveCategory(Guid id)
+  public async Task<ActionResult<Category>> RemoveCategory(int id)
   {
     return Ok(_categoryService.RemoveCategory(id));
   }

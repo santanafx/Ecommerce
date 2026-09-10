@@ -11,5 +11,5 @@ public class PaginationParams
   }
 
   public string SearchTerm { get; set; }
-  public Guid? CategoryId { get; set; }
+  public int? CategoryId { get; set; }
 }

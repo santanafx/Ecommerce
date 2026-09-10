@@ -33,15 +33,15 @@ public class ProductsService : IProductsService
     return product;
   }
 
-  public async Task<Product> Product(Guid id)
+  public async Task<Product> Product(int id)
   {
-    if (id == Guid.Empty)
+    if (id <= 0)
       throw new ArgumentException("User must provide id");
 
-    if (_dbContextEcommerce.Products.Find(id) == null)
+    var product = _dbContextEcommerce.Products.Find(id);
+    if (product == null)
       throw new ArgumentException("The product id doesnt exist");
 
-    var product = _dbContextEcommerce.Products.Find(id);
     return product;
   }
 
@@ -71,9 +71,9 @@ public class ProductsService : IProductsService
     return new PagedResponse<Product>(products, paginationParams.PageNumber, paginationParams.PageSize, totalRecords);
   }
 
-  public async Task<Product> RemoveProduct(Guid id)
+  public async Task<Product> RemoveProduct(int id)
   {
-    if (id == Guid.Empty)
+    if (id <= 0)
       throw new ArgumentException("User must provide id");
 
     var product = _dbContextEcommerce.Products.Find(id);
@@ -86,9 +86,9 @@ public class ProductsService : IProductsService
     return product;
   }
 
-  public async Task<Product> UpdateProduct(Guid id, ProductDto productDto)
+  public async Task<Product> UpdateProduct(int id, ProductDto productDto)
   {
-    if (id == Guid.Empty)
+    if (id <= 0)
       throw new ArgumentException("User must provide id");
 
     var productFoundInDatabase = _dbContextEcommerce.Products.Find(id);

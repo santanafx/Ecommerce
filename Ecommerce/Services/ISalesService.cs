@@ -1,7 +1,7 @@
 public interface ISalesService
 {
-  Task<ICollection<Sale>> Sales();
-  Task<Sale> Sale(Guid id);
-  Task<Sale> NewSale(SaleDto saleDto);
-  Task<PagedResponse<Sale>> GetSalesPaginated(PaginationParams paginationParams);
+  Task<ICollection<SaleResponseDto>> Sales();
+  Task<SaleResponseDto> Sale(int id);
+  Task<SaleResponseDto> NewSale(SaleDto saleDto);
+  Task<PagedResponse<SaleResponseDto>> GetSalesPaginated(PaginationParams paginationParams);
 }
