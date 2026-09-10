@@ -16,6 +16,12 @@ public class ProductsController : ControllerBase
     return Ok(_productsService.Products());
   }
 
+  [HttpGet("paginated")]
+  public async Task<ActionResult<PagedResponse<Product>>> GetProductsPaginated([FromQuery] PaginationParams paginationParams)
+  {
+    return Ok(await _productsService.GetProductsPaginated(paginationParams));
+  }
+
   [HttpPost]
   public async Task<ActionResult<Product>> AddProducts([FromBody] ProductDto productDto)
   {
