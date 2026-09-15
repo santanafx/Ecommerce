@@ -17,5 +17,10 @@ public class DbContextEcommerce : DbContext
     modelBuilder.Entity<Product>()
       .HasIndex(p => p.Name)
       .IsUnique();
+
+    modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsDeleted);
+    modelBuilder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
+    modelBuilder.Entity<Sale>().HasQueryFilter(s => !s.IsDeleted);
+    modelBuilder.Entity<ProductSaleItem>().HasQueryFilter(psi => !psi.IsDeleted);
   }
 }

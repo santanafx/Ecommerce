@@ -7,6 +7,8 @@ public class Product
   public int StockQuantity { get; private set; }
   public int CategoryId { get; private set; }
   public Category Category { get; private set; }
+  public bool IsDeleted { get; private set; }
+  public DateTime? DeletedAt { get; private set; }
   public ICollection<ProductSaleItem> Sales { get; private set; }
 
   private Product() { }
@@ -27,6 +29,12 @@ public class Product
     Price = dto.Price;
     StockQuantity = dto.StockQuantity;
     CategoryId = dto.CategoryId;
+  }
+
+  public void SoftDelete()
+  {
+    IsDeleted = true;
+    DeletedAt = DateTime.UtcNow;
   }
 
   public void DecreaseStock(int quantity)

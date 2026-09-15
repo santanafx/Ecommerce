@@ -7,6 +7,8 @@ public class ProductSaleItem
   public Sale Sale { get; private set; }
   public int Quantity { get; private set; }
   public decimal UnitPrice { get; private set; }
+  public bool IsDeleted { get; private set; }
+  public DateTime? DeletedAt { get; private set; }
 
   private ProductSaleItem() { }
 
@@ -16,5 +18,11 @@ public class ProductSaleItem
     SaleId = dto.SaleId;
     Quantity = dto.Quantity;
     UnitPrice = dto.UnitPrice;
+  }
+
+  public void SoftDelete()
+  {
+    IsDeleted = true;
+    DeletedAt = DateTime.UtcNow;
   }
 }

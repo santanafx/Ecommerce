@@ -80,7 +80,7 @@ public class ProductsService : IProductsService
     if (product == null)
       throw new ArgumentException("The product id doesnt exist");
 
-    _dbContextEcommerce.Products.Remove(product);
+    product.SoftDelete();
     _dbContextEcommerce.SaveChanges();
 
     return product;

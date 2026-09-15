@@ -29,7 +29,7 @@ public class CategoryService : ICategoryService
     if (category == null)
       throw new ArgumentException("Category id doesnt exist");
 
-    _dbContextEcommerce.Categories.Remove(category);
+    category.SoftDelete();
     _dbContextEcommerce.SaveChanges();
 
     return category;
